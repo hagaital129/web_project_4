@@ -1,0 +1,8 @@
+.content{
+    max-width: 1280px;
+    min-width: 320px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    color: #ffffff;
+    margin: 0 auto;
+}
