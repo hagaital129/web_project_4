@@ -6,7 +6,7 @@ font-weight: 500;
 line-height: 48px;
 letter-spacing: 0em;
 text-align: left;
-margin-right: 18px;
+margin: 0 18px 0 0;
 }
 
 @media screen and (max-width: 700px) {
