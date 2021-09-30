@@ -1,6 +1,7 @@
 .element__info{
-width: 100%;
+max-width: 288px;
 display: flex;
 justify-content: space-around;
 align-items: center;
+margin: 24px 15px 25px 21px;
 }
