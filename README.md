@@ -1,16 +1,23 @@
 # Project 4: Around The U.S.
 
 ### Overview
+* Website preview
+* About
+* Languages
 
-* Figma
-* Images
+**Website preview**
+* [Website preview](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
 
-**Figma**
+**About**
+A responsive one-page website that presents places around the world. The website contains few options:
+* Edit name button
+* Add picture button (Currently unavailable)
+* Like button (Currently work partially)
 
-* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+**Languages**
+* HTML
+* CSS
+* JavaScript
 
-**Images**
-
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-
-Have fun with JavaScript!
+* Based on BEM structure
+* Based on Flexbox 

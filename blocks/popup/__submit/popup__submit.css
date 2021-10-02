@@ -12,6 +12,7 @@
   line-height: 22px;
   letter-spacing: 0em;
   text-align: center;
+  cursor: pointer;
 }
 
 .popup__submit:hover {
@@ -23,5 +24,7 @@
     width: 238px;
     height: 46px;
     margin: 46px 22px 25px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }

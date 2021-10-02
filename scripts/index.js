@@ -9,13 +9,13 @@ let profileProfession = document.querySelector(".profile__profession");
 let profileEditButton = document.querySelector(".profile__edit-button");
 
 function openPopup() {
-  popup.classList.add("popup__is-opened");
+  popup.classList.add("popup_is-opened");
   popupInputName.value = profileName.textContent;
   popupInputProfession.value = profileProfession.textContent;
 }
 
 function closePopup() {
-  popup.classList.remove("popup__is-opened");
+  popup.classList.remove("popup_is-opened");
 }
 
 profileEditButton.addEventListener("click", openPopup);
