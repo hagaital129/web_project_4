@@ -6,7 +6,7 @@
 * Languages
 
 **Website preview**
-* [Website preview](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+* [Website preview](https://hagaital129.github.io/web_project_4/index.html)
 
 **About**
 A responsive one-page website that presents places around the world. The website contains few options:
