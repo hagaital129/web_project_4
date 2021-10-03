@@ -2,7 +2,7 @@
   width: 358px;
   height: 50.15px;
   border-radius: 2px;
-  margin: 48px 36px 0;
+  margin: 12px auto 0;
   background-color: black;
   border: none;
   color: white;
@@ -23,7 +23,7 @@
   .popup__submit {
     width: 238px;
     height: 46px;
-    margin: 46px 22px 25px;
+    margin: 16px 0 0;
     font-size: 14px;
     line-height: 17px;
   }
