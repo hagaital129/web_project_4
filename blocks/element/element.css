@@ -1,8 +1,8 @@
 .element {
   width: 282px;
-  min-height: 361px;
   border-radius: 10px;
   margin: 0 auto;
   background-color: #ffffff;
   color: #000000;
+  position: relative;
 }
