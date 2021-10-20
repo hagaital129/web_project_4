@@ -64,13 +64,23 @@
             </div>
         </main>
     </div>
+    <div class="popup" id="popup_image-container">
+        <div class="popup__image-wrapper">
+            <button class="popup__close" id="image_close_btn"></button>
+            <figure class="popup__figure-wrapper">
+                <img class="popup__image" />
+                <figcaption class="popup__image-info"></figcaption>
+            </figure>
+        </div>
+    </div>
     <template id="card-template">
         <li class="element">
             <button class="element__delete_btn" type="button" aria-label="delete button"></button>
             <img class="element__image">
             <div class="element__info">
                 <h2 class="element__title"></h2>
-                <button class="element__like-button element__like-button_not-active" type="button" aria-label="Like button"></button>
+                <button class="element__like-button element__like-button_not-active" type="button"
+                    aria-label="Like button"></button>
             </div>
         </li>
     </template>

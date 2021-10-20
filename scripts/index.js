@@ -67,7 +67,7 @@ profileFormWindow.addEventListener("submit", (evt) => {
 /*---ADD-CARD FORM---*/
 let profileAddCard = document.querySelector("#popup_type_add-card");
 let popupAddCardCloseButton = profileAddCard.querySelector(".popup__close");
-let addForm = profileAddCard.querySelector("#add_form");
+let addCardForm = profileAddCard.querySelector("#add_form");
 let inputTitle = profileAddCard.querySelector("popup__input_type_card-name");
 let inputImage = profileAddCard.querySelector("popup__input_type_card-link");
 let profileAddButton = document.querySelector(".profile__add-button");
@@ -86,6 +86,16 @@ function addPopupWrapper() {
   inputImage = "";
 }
 
+addCardForm.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  const newCard = createCardElement({
+    name: inputTitle.value,
+    link: inputImage
+  });
+  placesList.prepend(newCard);
+  closePopup(profileAddCard);
+})
+
 
 /*---TEMPLATE---*/
 const cardTemplate = document.querySelector("#card-template").content.querySelector(".element");
@@ -98,10 +108,15 @@ function createCardElement(cardData) {
   card.querySelector(".element__like-button").addEventListener("click", (event) => {
     card.querySelector(".element__like-button").classList.toggle("element__like-button_not-active");
     card.querySelector(".element__like-button").classList.toggle("element__like-button_is-active");
-  })
+  });
   card.querySelector(".element__delete_btn").addEventListener("click", (evt) => {
     const removeCard = card;
     removeCard.remove();
+  });
+  card.querySelector(".element__image").addEventListener("click", (evt) => {
+    openPopup(presentImage);
+    popupImage.src = card.querySelector(".element__image").src;
+    popupImageInfo.textContent = card.querySelector(".element__info").textContent;
   })
 
   return card;
@@ -111,4 +126,9 @@ initialCards.forEach((initialCardData) => {
   placesList.prepend(createCardElement(initialCardData));
 });
 
+const presentImage = document.querySelector("#popup_image-container");
+const popupImage = presentImage.querySelector(".popup__image");
+const presentImageCloseButton = presentImage.querySelector("#image_close_btn");
+const popupImageInfo = presentImage.querySelector(".popup__image-info");
 
+presentImageCloseButton.addEventListener("click", () => closePopup(presentImage));
