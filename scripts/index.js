@@ -68,8 +68,8 @@ profileFormWindow.addEventListener("submit", (evt) => {
 let profileAddCard = document.querySelector("#popup_type_add-card");
 let popupAddCardCloseButton = profileAddCard.querySelector(".popup__close");
 let addCardForm = profileAddCard.querySelector("#add_form");
-let inputTitle = profileAddCard.querySelector("popup__input_type_card-name");
-let inputImage = profileAddCard.querySelector("popup__input_type_card-link");
+let inputTitle = profileAddCard.querySelector(".popup__input_type_card-name");
+let inputImage = profileAddCard.querySelector(".popup__input_type_card-link");
 let profileAddButton = document.querySelector(".profile__add-button");
 
 popupAddCardCloseButton.addEventListener("click", () => {
@@ -82,29 +82,28 @@ profileAddButton.addEventListener("click", () => {
 });
 
 function addPopupWrapper() {
-  inputTitle = "";
-  inputImage = "";
+  inputTitle.value = "";
+  inputImage.value = "";
 }
 
 addCardForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   const newCard = createCardElement({
     name: inputTitle.value,
-    link: inputImage
-  });
+    link: inputImage.value,
+  }); 
   placesList.prepend(newCard);
   closePopup(profileAddCard);
 })
-
 
 /*---TEMPLATE---*/
 const cardTemplate = document.querySelector("#card-template").content.querySelector(".element");
 const placesList = document.querySelector(".elements__pattern");
 
-function createCardElement(cardData) {
+function createCardElement({name,link}) {
   const card = cardTemplate.cloneNode(true);
-  card.querySelector(".element__title").textContent = cardData.name;
-  card.querySelector(".element__image").src = cardData.link;
+  card.querySelector(".element__title").textContent = name;
+  card.querySelector(".element__image").src = link;
   card.querySelector(".element__like-button").addEventListener("click", (event) => {
     card.querySelector(".element__like-button").classList.toggle("element__like-button_not-active");
     card.querySelector(".element__like-button").classList.toggle("element__like-button_is-active");
@@ -117,7 +116,7 @@ function createCardElement(cardData) {
     openPopup(presentImage);
     popupImage.src = card.querySelector(".element__image").src;
     popupImageInfo.textContent = card.querySelector(".element__info").textContent;
-  })
+  });
 
   return card;
 }
@@ -125,6 +124,8 @@ function createCardElement(cardData) {
 initialCards.forEach((initialCardData) => {
   placesList.prepend(createCardElement(initialCardData));
 });
+
+
 
 const presentImage = document.querySelector("#popup_image-container");
 const popupImage = presentImage.querySelector(".popup__image");
