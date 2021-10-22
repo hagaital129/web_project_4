@@ -55,7 +55,7 @@
                     <form class="popup__form-window" name="popup__form" id="add_form">
                         <input type="text" class="popup__input popup__input_type_card-name" name="card-name"
                             placeholder="Card name" required>
-                        <input type="text" class="popup__input popup__input_type_card-link" name="card-link"
+                        <input type="url" class="popup__input popup__input_type_card-link" name="card-link"
                             placeholder="Card URL" required>
                         <button class="popup__submit" type="submit">Save
                         </button>
@@ -76,10 +76,10 @@
     <template id="card-template">
         <li class="element">
             <button class="element__delete_btn" type="button" aria-label="delete button"></button>
-            <img class="element__image" src="#">
+            <img class="element__image" src="#" alt="">
             <div class="element__info">
                 <h2 class="element__title"></h2>
-                <button class="element__like-button element__like-button_not-active" type="button"
+                <button class="element__like-button" type="button"
                     aria-label="Like button"></button>
             </div>
         </li>
