@@ -34,6 +34,21 @@ const initialCards = [
 /*---TOGGLE-POPUP-BUTTON---*/
 function openPopup(popupWindow) {
   popupWindow.classList.add("popup_is-opened");
+  document.addEventListener("keydown", useEscBtn);
+  popupWindow.removeEventListener("click", useMiceClick);
+
+}
+
+function useEscBtn(evt) {
+  if (evt.keyCode === 27) {
+    closePopup(document.querySelector(".popup_is-opened"));
+  }
+}
+
+function useMiceClick(evt) {
+  if (evt.target.classList.contains("popup_is-opened")) {
+    closePopup(evt.target);
+  }
 }
 
 function closePopup(popupWindow) {
@@ -106,13 +121,13 @@ addCardForm.addEventListener("submit", (evt) => {
     name: inputTitle.value,
     link: inputImage.value,
     alt: inputTitle.value,
-  }); 
+  });
   placesList.prepend(newCard);
   closePopup(profileAddCard);
 })
 
 /*---TEMPLATE---*/
-function createCardElement({name,link,alt}) {
+function createCardElement({ name, link, alt }) {
   const card = cardTemplate.cloneNode(true);
   const cardImageAlt = card.querySelector(".element__image");
   cardImageAlt.src = link;
