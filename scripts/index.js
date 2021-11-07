@@ -1,59 +1,4 @@
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg",
-    alt: "Forest with river in the middle",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg",
-    alt: "Lake between mountains",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg",
-    alt: "sunset",
-  },
-  {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg",
-    alt: "night with mountain view",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg",
-    alt: "lake with mountains",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg",
-    alt: "small port with boats",
-  },
-];
-
-/*---TOGGLE-POPUP-BUTTON---*/
-function openPopup(popupWindow) {
-  popupWindow.classList.add("popup_is-opened");
-  document.addEventListener("keydown", useEscBtn);
-  popupWindow.removeEventListener("click", useMiceClick);
-
-}
-
-function useEscBtn(evt) {
-  if (evt.keyCode === 27) {
-    closePopup(document.querySelector(".popup_is-opened"));
-  }
-}
-
-function useMiceClick(evt) {
-  if (evt.target.classList.contains("popup_is-opened")) {
-    closePopup(evt.target);
-  }
-}
-
-function closePopup(popupWindow) {
-  popupWindow.classList.remove("popup_is-opened");
-}
+import { initialCards } from './card.js'
 
 /*---EDIT-FORM---*/
 const profileEditProfile = document.querySelector("#popup_type_edit-profile");
@@ -81,12 +26,41 @@ const popupImageInfo = presentImage.querySelector(".popup__image-info");
 const cardTemplate = document.querySelector("#card-template").content.querySelector(".element");
 const placesList = document.querySelector(".elements__pattern");
 
+/*---TOGGLE-POPUP-BUTTON---*/
+function openPopup(popupWindow) {
+  popupWindow.classList.add("popup_is-opened");
+  document.addEventListener("keydown", useEscBtn);
+  popupWindow.addEventListener("click", useMiceClick);
+
+}
+
+function useEscBtn(evt) {
+  if (evt.keyCode === 27) {
+    closePopup(document.querySelector(".popup_is-opened"));
+  }
+}
+
+function useMiceClick(evt) {
+  if (evt.target.classList.contains("popup_is-opened")) {
+    closePopup(evt.target);
+  }
+}
+
+function closePopup(popupWindow) {
+  popupWindow.classList.remove("popup_is-opened");
+  document.removeEventListener("keydown", useEscBtn);
+  popupWindow.removeEventListener("click", useMiceClick);
+}
+
+
+
 popupEditCloseButton.addEventListener("click", () =>
   closePopup(profileEditProfile)
 );
 profileEditButton.addEventListener("click", () => {
   editProfileInfo();
   openPopup(profileEditProfile);
+  checkInitialFormValidity(profileFormWindow, pageSettings);
 });
 
 function editProfileInfo() {
@@ -108,6 +82,7 @@ popupAddCardCloseButton.addEventListener("click", () => {
 profileAddButton.addEventListener("click", () => {
   addPopupWrapper();
   openPopup(profileAddCard);
+  checkInitialFormValidity(addCardForm, pageSettings);
 });
 
 function addPopupWrapper() {
