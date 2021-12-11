@@ -9,7 +9,7 @@ export default class Card {
 
   createCard() {
     const cardName = this._templateSelector.querySelector('.element__title');
-    const cardImage = this.popupViewCard.querySelector('.element__image');
+    const cardImage = this._templateSelector.querySelector('.element__image');
     cardName.textContent = this._name;
     cardImage.style.backgroundImage = `url(${this._link})`;
 
