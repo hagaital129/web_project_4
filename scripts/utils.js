@@ -14,7 +14,7 @@ function openForm(popup) {
 
 function handleCloseClick(evt) {
   if (evt.target.classList.contains("popup_is-opened")) {
-    closeForm(document.querySelector(".popup_is-opened"));
+    closeForm(evt.target);
   }
 }
 
