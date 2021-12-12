@@ -22,6 +22,7 @@ export default class Card {
     this._setEventListeners();
 
     return this._template;
+    
   }
 
   _setEventListeners() {
