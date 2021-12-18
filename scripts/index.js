@@ -22,7 +22,6 @@ const addCardFormName = document.querySelector('#add_form');
 const collectAllPopups = document.querySelectorAll('.popup');
 
 
-
 const settings = {
   formSelector: ".popup__form-window",
   inputSelector: ".popup__input",
@@ -40,26 +39,27 @@ initialCards.forEach((data) => {
 });
 
 profileEditButton.addEventListener("click", () => {
-  openProfilePopup()
+  openProfilePopup();
 });
 
 profileAddButton.addEventListener("click", () => {
-  openForm(profileAddCard)
+  openForm(profileAddCard);
 });
 
 allCloseButtons.forEach(button => button.addEventListener('click', () => {
   collectAllPopups.forEach(popup => closeForm(popup));
-}));
+}),
+);
 
 
 /*========Forms Validation=========*/
-
 formsList.forEach((formElement) => {
   const form = new FormValidator(settings, formElement);
   form.enableValidation();
 });
 
-function handleEditProfileSubmit(event, popup) {
+
+function handleEditProfileSubmit(event, popup) { 
   event.preventDefault();
   profileName.textContent = inputEditName.value;
   profileProfession.textContent = inputEditInfo.value;
@@ -68,16 +68,23 @@ function handleEditProfileSubmit(event, popup) {
 
 function handleAddCardSubmit(event, popup) {
   event.preventDefault();
+  const resetButton = popup.querySelector('.popup__submit');
   const data = {
     name: inputTitle.value,
     link: inputImage.value
   };
-  const card = new Card(data, cardTemplate)
+  const card = new Card(data, cardTemplate);
   placesList.prepend(card.createCard());
-  closeForm(popup);
+  closeForm(popup); 
+  resetButton.disabled = false;
+  resetButton.classList.add('popup__submit_disabled');
   inputTitle.value = '';
   inputImage.value = '';
 }
 
-editFormName.addEventListener('submit', (event) => handleEditProfileSubmit(event, profileEditProfile));
-addCardFormName.addEventListener('submit', (event) => handleAddCardSubmit(event, profileAddCard));
+editFormName.addEventListener('submit', (event) => {
+  handleEditProfileSubmit(event, profileEditProfile)
+});
+addCardFormName.addEventListener('submit', (event) => {
+  handleAddCardSubmit(event, profileAddCard);
+});
