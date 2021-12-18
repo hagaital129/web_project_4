@@ -20,6 +20,8 @@ const allCloseButtons = document.querySelectorAll('.popup__close');
 const editFormName = document.querySelector('#edit_form');
 const addCardFormName = document.querySelector('#add_form');
 const collectAllPopups = document.querySelectorAll('.popup');
+const formPopup = document.querySelector('.popup__form-window');
+const formValidators = {};
 
 
 const settings = {
@@ -30,8 +32,6 @@ const settings = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible"
 };
-
-const formsList = Array.from(document.querySelectorAll(settings.formSelector));
 
 initialCards.forEach((data) => {
   const card = new Card(data, cardTemplate)
@@ -51,36 +51,41 @@ allCloseButtons.forEach(button => button.addEventListener('click', () => {
 }),
 );
 
-
-/*========Forms Validation=========*/
-formsList.forEach((formElement) => {
-  const form = new FormValidator(settings, formElement);
-  form.enableValidation();
-});
-
-
-function handleEditProfileSubmit(event, popup) { 
+function handleEditProfileSubmit(event, popup) {
   event.preventDefault();
   profileName.textContent = inputEditName.value;
   profileProfession.textContent = inputEditInfo.value;
   closeForm(popup);
+  formValidators[ editFormName.getAttribute('name') ].resetValidation()
+
+
 }
 
 function handleAddCardSubmit(event, popup) {
   event.preventDefault();
-  const resetButton = popup.querySelector('.popup__submit');
   const data = {
     name: inputTitle.value,
     link: inputImage.value
   };
   const card = new Card(data, cardTemplate);
   placesList.prepend(card.createCard());
-  closeForm(popup); 
-  resetButton.disabled = false;
-  resetButton.classList.add('popup__submit_disabled');
+  closeForm(popup);
   inputTitle.value = '';
   inputImage.value = '';
+  formValidators[ addCardFormName.getAttribute('name') ].resetValidation()
 }
+
+const enableValidation = (settings) => {
+  const formsList = Array.from(document.querySelectorAll(settings.formSelector));
+  formsList.forEach((formElement) => {
+    const validator = new FormValidator(settings, formElement);
+    const formName = formElement.getAttribute('name');
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(settings);
 
 editFormName.addEventListener('submit', (event) => {
   handleEditProfileSubmit(event, profileEditProfile)
