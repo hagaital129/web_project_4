@@ -36,3 +36,18 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/__error/popup__error.css);
+@import url(../blocks/popup/__remove-card-wrapper/popup__remove-card-wrapper.css);
+@import url(../blocks/popup/__submit/_confirm-removal/popup__submit_confirm-removal.css);
+@import url(../blocks/popup/__title/_confirm-removal/popup__title_confirm-removal.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/element/__like-button-wrapper/element__like-button-wrapper.css);
+@import url(../blocks/element/__like-button/_counter/element__like-button_counter.css);
+@import url(../blocks/profile/__avatar/_edit-image/profile__avatar_edit-image.css);
+@import url(../blocks/profile/__avatar/_hover/profile__avatar_hover.css);
+
+
+
+
+
+
+

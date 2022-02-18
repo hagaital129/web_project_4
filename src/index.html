@@ -14,14 +14,16 @@
         </header>
         <main>
             <section class="profile">
-                <div class="profile__avatar"></div>
+                <!-- <div class="profile__avatar"></div> -->
+                <img class="profile__avatar" src="#" alt="profile-image">
+                <a href="#" class="profile__avatar_hover"></a>
                 <div class="profile__info">
                     <div class="profile__info-inner">
-                        <h1 class="profile__name">Jacques Cousteau</h1>
+                        <h1 class="profile__name"></h1>
                         <button class="profile__edit-button" type="button" aria-label="Edit button">
                         </button>
                     </div>
-                    <p class="profile__profession">Explorer</p>
+                    <p class="profile__profession"></p>
                 </div>
                 <button class="profile__add-button" type="button" aria-label="Add item button"></button>
             </section>
@@ -49,11 +51,24 @@
                     </form>
                 </div>
             </div>
+
+            <div class="popup popup_type_edit-profile-avatar">
+                <div class="popup__content">
+                    <button type="button" class="popup__close" aria-label="Close button"></button>
+                    <h2 class="popup__title">Change profile image</h2>
+                    <form class="popup__form-window" name="edit-profile-avatar">
+                        <input type="url" name="link" class="popup__image_link" required>
+                        <span id="input_type_avatar-error" class="popup__error"></span>
+                        <button type="submit" class="popup__submit" aria-label="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+
             <div class="popup" id="popup_type_add-card">
                 <div class="popup__content">
                     <h2 class="popup__title">New Place</h2>
                     <button class="popup__close" type="button" aria-label="Close button"></button>
-                    <form class="popup__form-window" name="popup__form" id="add_form">
+                    <form class="popup__form-window" name="add-card" id="add_form">
                         <input id="input_type_card-name" type="text" class="popup__input popup__input_type_card-name"
                             name="name" placeholder="Card name" minlength="1" maxlength="30" required>
                         <span id="input_type_card-name-error" class="popup__error"></span>
@@ -68,13 +83,21 @@
         </main>
     </div>
 
-    <div class="popup popup_image-container" >
-        <div class="popup__image-wrapper">
-            <button class="popup__close" id="image_close_btn"></button>
+    <div class="popup popup_image-container">
+        <div class="popup__content popup__image-wrapper">
+            <button type="button" class="popup__close" id="image_close_btn" aria-label="Close popup"></button>
             <figure class="popup__figure-wrapper">
                 <img class="popup__image" src="#" alt="pictures reviews" />
                 <figcaption class="popup__image-info"></figcaption>
             </figure>
+        </div>
+    </div>
+    <div class="popup popup_type_confirm_removal">
+        <div class="popup__content popup__remove-card-wrapper">
+            <button type="button" class="popup__close" aria-label="Close popup"></button>
+            <h2 class="popup__title popup__title_confirm-removal">Are you sure?</h2>
+            <button type="submit" class="popup__submit popup__submit_confirm-removal"
+                aria-label="Submit">Yes</button>
         </div>
     </div>
     <template id="card-template">
@@ -83,11 +106,14 @@
             <img class="element__image" src="#" alt="">
             <div class="element__info">
                 <h2 class="element__title"></h2>
+                <div class="element__like-button-wrapper">
                 <button class="element__like-button" type="button" aria-label="Like button"></button>
+                <p class="element__like-button_counter">0</p>
+            </div>
             </div>
         </li>
     </template>
-    
+
 </body>
 
 </html>

@@ -6,7 +6,7 @@
 * Languages
 
 **Website preview**
-* [Website preview](https://hagaital129.github.io/web_project_4/index.html)
+* [Website preview](https://hagaital129.github.io/web_project_4/)
 
 **About**
 A responsive one-page website that presents places around the world. The website contains few options:

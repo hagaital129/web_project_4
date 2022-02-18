@@ -1,0 +1,4 @@
+.popup__remove-card-wrapper{
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,21 @@
+.profile__avatar_edit-image{
+  min-width: 50px;
+  max-height: 24px;
+  background-image: url(../../../../images/edit-pen.svg);
+  border: red solid 10px;
+  color: white;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 0;
+  margin: 37px 18px 0;
+}
+
+@media screen and (max-width:650px){
+  .profile__button_type_edit {
+    justify-self: start;
+    min-width: 18px;
+    max-height: 18px;
+    background-size: 8px;
+    margin: 3px 0 0 10px;
+  }
+}
