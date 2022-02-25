@@ -113,8 +113,8 @@ function generateCard(data) {
       }
     },
   });
-  const photofeed = card.createCard();
-  return photofeed;
+  const photogrid = card.createCard();
+  return photogrid;
 }
 
 const section = new Section((data) => {
