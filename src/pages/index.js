@@ -1,3 +1,4 @@
+import "../pages/index.css";
 import Card from "../scripts/components/Card.js";
 import FormValidator from "../scripts/components/FormValidator.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
@@ -27,7 +28,6 @@ import {
   deleteConfirmBtn,
 } from "../scripts/utils/constants";
 
-import "./index.css";
 
 
 
@@ -151,28 +151,6 @@ const userInfo = new UserInfo({
   profileImgSelector: ".profile__image",
 });
 
-const popupEdit = new PopupWithForm(
-  ".popup_edit",
-  (data) => {
-    popupEdit.showLoading();
-    api
-      .editProfileInfo(data.name, data.occupation)
-      .then((res) => {
-        userInfo.setUserInfo(res);
-        popupEdit.close();
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      })
-
-      .finally(() => {
-        popupEdit.hideLoading();
-      });
-  },
-  editSaveBtn.textContent,
-  "Saving..."
-);
-
 popupEdit.setEventListeners();
 
 const formSettings = {
@@ -214,6 +192,28 @@ profilePicEditButton.addEventListener("click", () => {
   popupProfileImg.open();
   formValidators[profileImgform.getAttribute("name")].resetValidation();
 });
+
+const popupEdit = new PopupWithForm(
+  ".popup_edit",
+  (data) => {
+    popupEdit.showLoading();
+    api
+      .editProfileInfo(data.name, data.occupation)
+      .then((res) => {
+        userInfo.setUserInfo(res);
+        popupEdit.close();
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      })
+
+      .finally(() => {
+        popupEdit.hideLoading();
+      });
+  },
+  editSaveBtn.textContent,
+  "Saving..."
+);
 
 const popupProfileImg = new PopupWithForm(
   ".popup_profile-img",
