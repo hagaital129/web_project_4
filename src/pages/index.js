@@ -92,6 +92,7 @@ function generateCard(data) {
     },
     handleLikeClick: (cardId) => {
       const isLiked = card.isLiked();
+      
       if (isLiked) {
         api
           .dislikeCard(cardId)
@@ -111,7 +112,7 @@ function generateCard(data) {
             console.log(`Error: ${err}`);
           });
       }
-    },
+    }
   });
   const photogrid = card.createCard();
   return photogrid;
@@ -150,6 +151,28 @@ const userInfo = new UserInfo({
   profileJobSelector: ".profile__occupation",
   profileImgSelector: ".profile__image",
 });
+
+const popupEdit = new PopupWithForm(
+  ".popup_edit",
+  (data) => {
+    popupEdit.showLoading();
+    api
+      .editProfileInfo(data.name, data.occupation)
+      .then((res) => {
+        userInfo.setUserInfo(res);
+        popupEdit.close();
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      })
+
+      .finally(() => {
+        popupEdit.hideLoading();
+      });
+  },
+  editSaveBtn.textContent,
+  "Saving..."
+);
 
 popupEdit.setEventListeners();
 
@@ -193,27 +216,7 @@ profilePicEditButton.addEventListener("click", () => {
   formValidators[profileImgform.getAttribute("name")].resetValidation();
 });
 
-const popupEdit = new PopupWithForm(
-  ".popup_edit",
-  (data) => {
-    popupEdit.showLoading();
-    api
-      .editProfileInfo(data.name, data.occupation)
-      .then((res) => {
-        userInfo.setUserInfo(res);
-        popupEdit.close();
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      })
 
-      .finally(() => {
-        popupEdit.hideLoading();
-      });
-  },
-  editSaveBtn.textContent,
-  "Saving..."
-);
 
 const popupProfileImg = new PopupWithForm(
   ".popup_profile-img",
