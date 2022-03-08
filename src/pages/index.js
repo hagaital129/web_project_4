@@ -26,6 +26,7 @@ import {
   addSaveBtn,
   profileImgSaveBtn,
   deleteConfirmBtn,
+  formSettings
 } from "../scripts/utils/constants";
 
 
@@ -45,7 +46,7 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
   .then(([cardsData, userData]) => {
     userId = userData._id;
     section.render(cardsData);
-    userInfo.setUserInfo({ name: userData.name, about: userData.about, avatar: userData.avatar });
+    userInfo.setUserInfo(userData);
   })
   .catch((err) => {
     console.log(`Error: ${err}`);
@@ -70,7 +71,7 @@ function generateCard(data) {
       const target = evt.target;
       const link = target.src;
       const name = target.alt;
-      popupPhoto.open(link, name);
+      popupPhoto.open(data);
       popupPhoto.setEventListeners();
     },
     handleDeleteCard: (cardId) => {
@@ -176,14 +177,7 @@ const popupEdit = new PopupWithForm(
 
 popupEdit.setEventListeners();
 
-const formSettings = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__save-button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
-};
+
 
 const formValidators = {};
 

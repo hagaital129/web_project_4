@@ -10,6 +10,8 @@ export default class Card {
     this._likes = data.likes;
     this._handleLikeClick = handleLikeClick;
     this._element = photoTemplate.cloneNode(true);
+    this._likeBtn = this._element.querySelector(".photo-grid__card-button");
+    this._likeBtnCounter = this._element.querySelector(".photo-grid__card-button-counter")
   }
 
   createCard() {
@@ -58,13 +60,14 @@ export default class Card {
     this._likes = newLikes;
     this._renderLikes();
   }
+@import url();
 
   _renderLikes() {
     if (this.checkIfLiked()) {
-      this._element.querySelector(".photo-grid__card-button").classList.add("photo-grid__card-button_active");
+      this._likeBtn.classList.add("photo-grid__card-button_active");
     } else {
-      this._element.querySelector(".photo-grid__card-button").classList.remove("photo-grid__card-button_active");
+      this._likeBtn.classList.remove("photo-grid__card-button_active");
     }
-    this._element.querySelector(".photo-grid__card-button-counter").textContent = this._likes.length;
+    this._likeBtnCounter.textContent = this._likes.length;
   }
 }
