@@ -1,6 +1,10 @@
 import Popup from "./Popup";
 
 export default class PopupDeleteCard extends Popup {
+  constructor(popupSelector){
+    super(popupSelector);
+    this._form = this._popup.querySelector(".popup__form");
+  }
   setAction(action) {
     this._handleSubmit = action;
   }
@@ -9,12 +13,14 @@ export default class PopupDeleteCard extends Popup {
     this._popup.addEventListener("submit", (event) => {
       event.preventDefault();
       this._handleSubmit();
-      this.close();
     });
     super.setEventListeners();
   }
-
-  open = () => {
-    super.open();
-  };
+close() {
+  this._form.reset()
+  super.close();
+}
+  // open = () => {
+  //   super.open();
+  // };
 }

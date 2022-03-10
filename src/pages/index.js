@@ -1,6 +1,7 @@
 import "../pages/index.css";
 import Card from "../scripts/components/Card.js";
 import FormValidator from "../scripts/components/FormValidator.js";
+import Popup from "../scripts/components/Popup";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import PopupDeleteCard from "../scripts/components/PopupDeleteCard";
@@ -71,7 +72,7 @@ function generateCard(data) {
       const target = evt.target;
       const link = target.src;
       const name = target.alt;
-      popupPhoto.open(data);
+      popupPhoto.open(link, name);
       popupPhoto.setEventListeners();
     },
     handleDeleteCard: (cardId) => {
@@ -82,6 +83,7 @@ function generateCard(data) {
           .deleteCard(cardId)
           .then(() => {
             card.removeCard();
+            deleteConfirmationPopup.close();
           })
           .catch((err) => {
             console.log(`Error: ${err}`);
@@ -91,29 +93,51 @@ function generateCard(data) {
           });
       });
     },
-    handleLikeClick: (cardId) => {
-      const isLiked = card.isLiked();
-      
-      if (isLiked) {
+    likeClickHandler: (card) => {
+      if (card.checkIfLiked(userId)) {
         api
-          .dislikeCard(cardId)
-          .then((res) => {
-            card.setLikes(res.likes);
+          .dislikeCard(card.getCardId())
+          .then((data) => {
+            card.refreshCard(data, userId);
           })
           .catch((err) => {
             console.log(`Error: ${err}`);
-          });
-      } else {
+          })
+      }
+      else {
         api
-          .likeCard(cardId)
-          .then((res) => {
-            card.setLikes(res.likes);
+          .likeCard(card.getCardId())
+          .then((data) => {
+            card.refreshCard(data, userId);
           })
           .catch((err) => {
             console.log(`Error: ${err}`);
-          });
+          })
       }
     }
+    // handleLikeClick: (cardId) => {
+    //   const isLiked = card.isLiked();
+
+    //   if (isLiked) {
+    //     api
+    //       .dislikeCard(cardId)
+    //       .then((res) => {
+    //         card.setLikes(res.likes);
+    //       })
+    //       .catch((err) => {
+    //         console.log(`Error: ${err}`);
+    //       });
+    //   } else {
+    //     api
+    //       .likeCard(cardId)
+    //       .then((res) => {
+    //         card.setLikes(res.likes);
+    //       })
+    //       .catch((err) => {
+    //         console.log(`Error: ${err}`);
+    //       });
+    //   }
+    // }
   });
   const photogrid = card.createCard();
   return photogrid;

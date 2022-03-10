@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({ data, user, photoTemplate, handleCardClick, handleDeleteCard, handleLikeClick }) {
+  constructor({ data, user, photoTemplate, handleCardClick, handleDeleteCard, likeClickHandler }) {
     this._name = data.name;
     this._link = data.link;
     this._handleCardClick = handleCardClick;
@@ -7,8 +7,9 @@ export default class Card {
     this._id = data._id;
     this._userId = user;
     this._ownerId = data.owner._id;
+    this._cardId = data._id;
     this._likes = data.likes;
-    this._handleLikeClick = handleLikeClick;
+    this._likeClickHandler = likeClickHandler;
     this._element = photoTemplate.cloneNode(true);
     this._likeBtn = this._element.querySelector(".photo-grid__card-button");
     this._likeBtnCounter = this._element.querySelector(".photo-grid__card-button-counter")
@@ -16,27 +17,76 @@ export default class Card {
 
   createCard() {
     this._cardImage = this._element.querySelector(".photo-grid__image");
-
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._element.querySelector(".photo-grid__text").textContent = this._name;
     this._setEventListeners();
-
     //show trash bin icon only to the owner
     if (this._userId !== this._ownerId) {
       this._element.querySelector(".photo-grid__delete-btn").style.display = "none";
     }
-
-    this._renderLikes();
+    this._likeBtnCounter.textContent = this._likes.length
 
     return this._element;
   }
 
-  _setEventListeners() {
-    const cardBtn = this._element.querySelector(".photo-grid__card-button");
+  getCardId() {
+    return this._cardId;
+  }
 
-    cardBtn.addEventListener("click", () => {
-      this._handleLikeClick(this._id);
+  _handelLike() {
+    this._likeBtn.classList.toggle('photo-grid__card-button_active')
+  }
+
+  _likeStatus(){
+    const likes = Array.from(this.likes);
+    likes.forEach((person) => {
+      if(person._id === this._userId){
+        this._likeBtn.classList.add("photo-grid__card-button_active");
+      }
+    })
+  }
+
+  checkIfLiked(user) {
+    if(this._likes.find((like) => like._id === user)) {
+      this._liked = true;
+    }
+    else{
+      this._liked = false;
+    }
+
+    return this._liked;
+  }
+
+  _cardLiked() {
+    this._element
+      .querySelector('.photo-grid__card-button')
+      .classList.add("photo-grid__card-button_active");
+  }
+
+  _cardUnliked() {
+    this._element
+      .querySelector('.photo-grid__card-button')
+      .classList.remove("photo-grid__card-button_active");
+  }
+
+  refreshCard(data, userId) {
+    this._likes = data.likes;
+    if(this.checkIfLiked(userId)) {
+      this._cardLiked();
+    }
+    else {
+      this._cardUnliked();
+    }
+    this._element
+      .querySelector('.photo-grid__card-button-counter')
+      .textContent = this._likes.length;
+  }
+
+  _setEventListeners() {
+
+    this._likeBtn.addEventListener("click", () => {
+      this._likeClickHandler(this);
     });
     //photo popup
     this._element.querySelector(".photo-grid__image").addEventListener("click", (evt) => {
@@ -48,26 +98,9 @@ export default class Card {
     });
   }
 
-  checkIfLiked() {
-    return this._likes.some((person) => person._id === this._userId);
-  }
   removeCard() {
     this._element.remove();
     this._element = null;
   }
 
-  setLikes(newLikes) {
-    this._likes = newLikes;
-    this._renderLikes();
-  }
-@import url();
-
-  _renderLikes() {
-    if (this.checkIfLiked()) {
-      this._likeBtn.classList.add("photo-grid__card-button_active");
-    } else {
-      this._likeBtn.classList.remove("photo-grid__card-button_active");
-    }
-    this._likeBtnCounter.textContent = this._likes.length;
-  }
 }
