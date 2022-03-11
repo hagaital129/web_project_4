@@ -58,25 +58,27 @@ export default class Card {
     return this._liked;
   }
 
-  _cardLiked() {
-    this._element
-      .querySelector('.photo-grid__card-button')
-      .classList.add("photo-grid__card-button_active");
-  }
+  // _cardLiked() {
+  //   this._element
+  //     .querySelector('.photo-grid__card-button')
+  //     .classList.add("photo-grid__card-button_active");
+  // }
 
-  _cardUnliked() {
-    this._element
-      .querySelector('.photo-grid__card-button')
-      .classList.remove("photo-grid__card-button_active");
-  }
+  // _cardUnliked() {
+  //   this._element
+  //     .querySelector('.photo-grid__card-button')
+  //     .classList.remove("photo-grid__card-button_active");
+  // }
 
   refreshCard(data, userId) {
     this._likes = data.likes;
     if(this.checkIfLiked(userId)) {
-      this._cardLiked();
+      // this._cardLiked();
+      this._handelLike();
     }
     else {
-      this._cardUnliked();
+      // this._cardUnliked();
+      !this._handelLike();
     }
     this._element
       .querySelector('.photo-grid__card-button-counter')
